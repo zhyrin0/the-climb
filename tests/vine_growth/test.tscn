@@ -1,0 +1,89 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/plant/plant.tscn" type="PackedScene" id=1]
+[ext_resource path="res://tests/vine_growth/test.gd" type="Script" id=2]
+
+[node name="Test" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Light1" type="Area2D" parent="." groups=["light"]]
+position = Vector2( 163, 130 )
+collision_layer = 128
+collision_mask = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="Light1"]
+color = Color( 1, 1, 0, 1 )
+polygon = PoolVector2Array( -1, -1, 1, -1, 1, 1, -1, 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Light1"]
+polygon = PoolVector2Array( -1, -1, 1, -1, 1, 1, -1, 1 )
+
+[node name="Light2" type="Area2D" parent="." groups=["light"]]
+position = Vector2( 28, 73 )
+collision_layer = 16
+collision_mask = 0
+
+[node name="Polygon2D" type="Polygon2D" parent="Light2"]
+color = Color( 1, 1, 0, 1 )
+polygon = PoolVector2Array( -1, -1, 1, -1, 1, 1, -1, 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Light2"]
+polygon = PoolVector2Array( -1, -1, 1, -1, 1, 1, -1, 1 )
+
+[node name="Anchor1" type="StaticBody2D" parent="." groups=["anchor"]]
+position = Vector2( 61, 175 )
+collision_layer = 8
+collision_mask = 0
+input_pickable = true
+
+[node name="Polygon2D" type="Polygon2D" parent="Anchor1"]
+color = Color( 0.501961, 0.501961, 1, 1 )
+polygon = PoolVector2Array( -10, -5, 10, -5, 10, 6, -10, 6 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Anchor1"]
+polygon = PoolVector2Array( -10, -5, 10, -5, 10, 6, -10, 6 )
+
+[node name="Anchor2" type="StaticBody2D" parent="." groups=["anchor"]]
+position = Vector2( 153, 104 )
+collision_layer = 8
+collision_mask = 0
+input_pickable = true
+
+[node name="Polygon2D" type="Polygon2D" parent="Anchor2"]
+color = Color( 0.501961, 0.501961, 1, 1 )
+polygon = PoolVector2Array( -10, -5, 10, -5, 10, 6, -10, 6 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Anchor2"]
+polygon = PoolVector2Array( -10, -5, 10, -5, 10, 6, -10, 6 )
+
+[node name="Plant" parent="." instance=ExtResource( 1 )]
+position = Vector2( 100, 223 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="UI/HBoxContainer"]
+margin_right = 45.0
+margin_bottom = 20.0
+size_flags_vertical = 0
+text = "Grow"
+
+[node name="Label" type="Label" parent="UI/HBoxContainer"]
+margin_left = 49.0
+margin_right = 192.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Drag light sources
+and anchors around."
+align = 2
+
+[connection signal="input_event" from="Light1" to="." method="_on_Light1_input_event"]
+[connection signal="input_event" from="Light2" to="." method="_on_Light2_input_event"]
+[connection signal="input_event" from="Anchor1" to="." method="_on_Anchor1_input_event"]
+[connection signal="input_event" from="Anchor2" to="." method="_on_Anchor2_input_event"]
+[connection signal="pressed" from="UI/HBoxContainer/Button" to="." method="_on_Button_pressed"]

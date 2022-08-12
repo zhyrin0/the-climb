@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/plant/vine.gd" type="Script" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 1.0
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.33 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Vine" type="Path2D"]
+curve = null
+script = ExtResource( 1 )
+_max_length = 64.0
+_growth_speed = 32.0
+_debug_color = Color( 0.25098, 0.878431, 1, 0.25098 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+loop = false
+
+[node name="Tip" type="Area2D" parent="PathFollow2D"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Tip"]
+shape = SubResource( 2 )
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 5.0
+width_curve = SubResource( 1 )
+default_color = Color( 0, 0.627451, 0, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[connection signal="body_entered" from="PathFollow2D/Tip" to="." method="_on_Tip_body_entered" flags=6]

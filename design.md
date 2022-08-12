@@ -6,17 +6,22 @@
 
 ## The Plant
 ### Default Behaviour
-* Following sunlight
+- The plant starts dormant, it needs to be woken up. Sometimes it also gets tired from all the growing :)
+- An awake plant starts growing upwards, when it reaches a new uninhabitad platform, it creates an overgrown platform
+- A flower that successfully reached a new platfrom blooms fully, and the platform creates a new bud
+- Following sunlight
 ### Player Influence
-* Block out sunlight
+- Block out sunlight
+- Plant grafting to give it different abilities
 ### Hazards
-* Bugs eating the vines
+- Bugs eating the vines
 
 ## Game Elements
 ### Must Have
-* Platformer movement (left, right, jucy feeling jump and fall) ✔️
-* Platforms you can jump up on, and maybe even fall through ✔️
-* Camera that follows the player
+- Platformer movement (left, right, jucy feeling jump and fall) ✔️
+- Platforms you can jump up on, and maybe even fall through ✔️
+- Camera that follows the player
 ### Should Have
+- A plant that can grow upwards and create platforms
 ### Could Have
 ### Won't Have

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/plant/plant.gd" type="Script" id=1]
+
+[node name="Plant" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Stem" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 0, -4 )
+width = 2.0
+default_color = Color( 0, 0.501961, 0, 1 )
+
+[node name="Vines" type="Node2D" parent="."]
+position = Vector2( 0, -4 )
+
+[node name="Flower" type="Polygon2D" parent="."]
+color = Color( 0.752941, 0.752941, 0.752941, 1 )
+polygon = PoolVector2Array( 0, -2, 2, -4, 0, -6, -2, -4 )
