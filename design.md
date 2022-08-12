@@ -14,8 +14,8 @@
 
 ## Game Elements
 ### Must Have
-* Platformer movement (left, right, jucy feeling jump and fall)
-* Platforms you can jump up on, and maybe even fall through
+* Platformer movement (left, right, jucy feeling jump and fall) ✔️
+* Platforms you can jump up on, and maybe even fall through ✔️
 * Camera that follows the player
 ### Should Have
 ### Could Have
