@@ -22,11 +22,16 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		if Input.is_action_just_pressed("move_jump"):
 			set_collision_mask_bit(PLATFORM_COLLISION_BIT, false)
+			_fall_raycast.set_collision_mask_bit(PLATFORM_COLLISION_BIT, false)
 			_velocity.y -= _jump_velocity
 		elif Input.is_action_pressed("move_fall"):
 			_fallthrough_platform = _fall_raycast.get_collider()
 			if _fallthrough_platform:
 				add_collision_exception_with(_fallthrough_platform)
+		if _fall_raycast.is_colliding():
+			var platform: Object = _fall_raycast.get_collider()
+			if platform.has_method("step_on"):
+				platform.call("step_on")
 	
 	_velocity = move_and_slide(_velocity, Vector2.UP)
 	_reset_collision_rules()
@@ -52,6 +57,7 @@ func set_jump_time(new_value: float) -> void:
 func _reset_collision_rules() -> void:
 	if _velocity.y > 0.0:
 		set_collision_mask_bit(PLATFORM_COLLISION_BIT, true)
+		_fall_raycast.set_collision_mask_bit(PLATFORM_COLLISION_BIT, true)
 	if is_on_floor() and _fallthrough_platform:
 		remove_collision_exception_with(_fallthrough_platform)
 		_fallthrough_platform = null

@@ -23,5 +23,6 @@
 - Camera that follows the player
 ### Should Have
 - A plant that can grow upwards and create platforms
+- Platforms that are naturally generated, in different states of usability
 ### Could Have
 ### Won't Have
