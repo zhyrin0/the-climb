@@ -10,13 +10,13 @@ enum State {
 
 const _PLATFORM_COLLISION_BIT := 2
 export(State) var state: int setget set_state
-onready var _polygon := $Polygon2D as Polygon2D
+onready var _sprite := $Sprite as Sprite
 onready var _collision_rectangle := $CollisionShape2D.shape as RectangleShape2D
 onready var _erosion := $ErosionTimer as Timer
 
 
 func _ready() -> void:
-	self.state = state
+	set_state(state)
 
 
 func step_on() -> void:
@@ -27,19 +27,19 @@ func step_on() -> void:
 func set_state(new_value: int) -> void:
 	state = new_value
 	set_collision_layer_bit(_PLATFORM_COLLISION_BIT, state != State.ERODED)
-	if _polygon:
+	if _sprite:
+		_sprite.modulate.a = 1.0
 		match state:
 			State.ERODED:
-				_polygon.color.a = 0.5
+				_sprite.frame = 0
+				_sprite.modulate.a = 0.75
 			State.ERODABLE:
-				_polygon.color.a = 1.0
+				_sprite.frame = 1
 			State.STABLE:
-				_polygon.color = Color8(192, 192, 192)
+				_sprite.frame = 2
 			State.FLOWERY:
-				_polygon.color = Color.lightgreen
+				_sprite.frame = 3
 
 
 func _on_ErosionTimer_timeout() -> void:
-	state = State.ERODED
-	_polygon.color.a = 0.5
-	set_collision_layer_bit(_PLATFORM_COLLISION_BIT, false)
+	set_state(State.ERODED)
