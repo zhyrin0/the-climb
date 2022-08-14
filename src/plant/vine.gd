@@ -9,7 +9,14 @@ Each point except for the last of the path has it's out hander facing the lastes
 signal max_length_reached
 signal anchor_reached(anchor)
 
+enum State {
+	GROWING,
+	WITHERING,
+	ANCHORED,
+}
+
 const _ONE_PIXEL_SQ := 1.0
+export(State) var state: int setget set_state
 export(float) var _max_length: float
 export(float) var _growth_speed: float
 export(Color) var _debug_color: Color
@@ -18,12 +25,13 @@ onready var _tip := $PathFollow2D/Tip as Area2D
 onready var _line := $Line2D as Line2D
 
 
-func init(light_direction: Vector2, anchor_global_position: Vector2) -> void:
+func init(light_direction: Vector2, target_global_position: Vector2) -> void:
 	yield(self, "ready")
 	
+	set_state(State.GROWING)
 	create_light_seeking_curve(light_direction)
-	if anchor_global_position != Vector2.INF:
-		update_anchoring_curve(anchor_global_position)
+	if target_global_position != Vector2.INF:
+		update_targeting_curve(target_global_position)
 
 
 func _process(delta: float) -> void:
@@ -50,11 +58,11 @@ func create_light_seeking_curve(light_direction: Vector2) -> void:
 	_line.add_point(_path_follow.position)
 
 
-func update_anchoring_curve(anchor_global_position: Vector2) -> void:
-	var anchor_position: Vector2 = to_local(anchor_global_position)
-	if position.distance_squared_to(anchor_global_position) > _max_length*_max_length:
-		anchor_position = anchor_position.normalized() * _max_length
-	curve.set_point_position(1, anchor_position)
+func update_targeting_curve(target_global_position: Vector2) -> void:
+	var target_position: Vector2 = to_local(target_global_position)
+	if position.distance_squared_to(target_global_position) > _max_length*_max_length:
+		target_position = target_position.normalized() * _max_length
+	curve.set_point_position(1, target_position)
 
 
 func grow(delta: float) -> void:
@@ -65,9 +73,19 @@ func grow(delta: float) -> void:
 		set_process(false)
 		_tip.set_deferred("monitoring", false)
 		emit_signal("max_length_reached")
+		set_state(State.WITHERING)
+
+
+func set_state(new_value: int) -> void:
+	state = new_value
+	if new_value == State.WITHERING:
+		var tween: SceneTreeTween = create_tween()
+		tween.tween_property(_line, "default_color", Color.chocolate, 1.0)
+		tween.play()
 
 
 func _on_Tip_body_entered(anchor: Node) -> void:
+	set_state(State.ANCHORED)
 	set_process(false)
 	_tip.set_deferred("monitoring", false)
 	emit_signal("anchor_reached", anchor)

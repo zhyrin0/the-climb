@@ -16,7 +16,7 @@ func _ready() -> void:
 func _unhandled_key_input(event: InputEventKey) -> void:
 	if Input.is_action_just_pressed("use_item"):
 		var plant: Plant = _plants.get_child(_plants.get_child_count() - 1)
-		plant.start_vine()
+		plant.set_state(Plant.State.GROWING)
 
 
 func _get_camera_bounds() -> Rect2:
