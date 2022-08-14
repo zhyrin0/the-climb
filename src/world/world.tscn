@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/platform/platform.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/player/player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/world/assets/root_layer_2.png" type="Texture" id=6]
 [ext_resource path="res://src/world/world.gd" type="Script" id=7]
 [ext_resource path="res://src/plant/plant.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/pickup/pickup.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 4, 248 )
@@ -150,6 +151,9 @@ __meta__ = {
 
 [node name="Plant" parent="Plants" instance=ExtResource( 8 )]
 position = Vector2( 136, 480 )
+
+[node name="WateringCan" parent="." instance=ExtResource( 9 )]
+position = Vector2( 48, 400 )
 
 [node name="Sunlight" type="Light2D" parent="." groups=["light"]]
 position = Vector2( 96, -240 )
