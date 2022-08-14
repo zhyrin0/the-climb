@@ -133,18 +133,12 @@ __meta__ = {
 position = Vector2( 48, 424 )
 state = 2
 
-[node name="Polygon2D" parent="Platforms/Platform1" index="0"]
-polygon = PoolVector2Array( -24, -8, 24, -8, 24, 8, -24, 8 )
-
 [node name="CollisionShape2D" parent="Platforms/Platform1" index="1"]
 shape = SubResource( 4 )
 
 [node name="Platform2" parent="Platforms" groups=["anchor"] instance=ExtResource( 1 )]
 position = Vector2( 112, 392 )
 state = 1
-
-[node name="Polygon2D" parent="Platforms/Platform2" index="0"]
-polygon = PoolVector2Array( -24, -8, 24, -8, 24, 8, -24, 8 )
 
 [node name="CollisionShape2D" parent="Platforms/Platform2" index="1"]
 shape = SubResource( 4 )
@@ -171,7 +165,7 @@ __meta__ = {
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 96, 472 )
 
-[connection signal="anchor_reached" from="Plants/Plant" to="." method="_on_Plant_anchor_reached"]
+[connection signal="anchor_reached" from="Plants/Plant" to="." method="_on_Plant_anchor_reached" flags=6]
 
 [editable path="Platforms/Platform1"]
 [editable path="Platforms/Platform2"]

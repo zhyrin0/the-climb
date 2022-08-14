@@ -24,6 +24,10 @@ func step_on() -> void:
 		_erosion.start()
 
 
+func get_plant_global_position() -> Vector2:
+	return ($PlantPosition as Position2D).global_position
+
+
 func set_state(new_value: int) -> void:
 	state = new_value
 	set_collision_layer_bit(_PLATFORM_COLLISION_BIT, state != State.ERODED)

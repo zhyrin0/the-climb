@@ -21,6 +21,9 @@ hframes = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="PlantPosition" type="Position2D" parent="."]
+position = Vector2( 0, -8 )
+
 [node name="ErosionTimer" type="Timer" parent="."]
 one_shot = true
 
