@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/plant/vine.gd" type="Script" id=1]
+[ext_resource path="res://src/plant/assets/vine.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 1.0
@@ -26,9 +27,11 @@ collision_mask = 8
 shape = SubResource( 2 )
 
 [node name="Line2D" type="Line2D" parent="."]
-width = 5.0
+width = 6.0
 width_curve = SubResource( 1 )
-default_color = Color( 0, 0.627451, 0, 1 )
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 2 )
+texture_mode = 1
 begin_cap_mode = 2
 end_cap_mode = 2
 

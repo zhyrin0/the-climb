@@ -10,6 +10,8 @@ onready var _vines := $Vines as Node
 
 
 func start_vine() -> void:
+	var sprite := $Sprite as Sprite
+	sprite.frame = 2
 	var lights: Array = get_tree().get_nodes_in_group("light")
 	lights.sort_custom(self, "_sort_proximity")
 	var anchors: Array = get_tree().get_nodes_in_group("anchor")
@@ -31,4 +33,6 @@ func _sort_proximity(left: Node2D, right: Node2D) -> bool:
 
 
 func _on_Vine_anchor_reached(anchor: Node2D) -> void:
+	var sprite := $Sprite as Sprite
+	sprite.frame = 3
 	emit_signal("anchor_reached", anchor)
