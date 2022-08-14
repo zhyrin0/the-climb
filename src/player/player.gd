@@ -15,10 +15,19 @@ onready var _pivot := $Pivot as Node2D
 onready var _watering_can := $Pivot/WateringCan as Sprite
 onready var _watering_can_area := $Pivot/WateringCan/Area2D as Area2D
 onready var _fall_raycast := $FallRayCast as RayCast2D
+onready var _animation_player := $AnimationPlayer as AnimationPlayer
+
+
+func _ready() -> void:
+	_animation_player.play("idle")
 
 
 func _physics_process(delta: float) -> void:
 	_velocity.x = Input.get_axis("move_left", "move_right") * movement_speed
+	if _velocity.x != 0.0 and _animation_player.current_animation == "idle":
+		_animation_player.play("run")
+	elif _velocity.x == 0.0 and _animation_player.current_animation == "run":
+		_animation_player.play("idle")
 	
 	var gravity_multiplier := fall_gravity_multiplier if _velocity.y > 0.0 else 1.0
 	_velocity.y += _gravity * gravity_multiplier * delta
