@@ -44,6 +44,14 @@ func _unhandled_key_input(_event: InputEventKey) -> void:
 		_pivot.scale.x = 1.0
 
 
+func set_camera_bounds(bounds: Rect2) -> void:
+	var camera := $Camera2D as Camera2D
+	camera.limit_left = bounds.position.x
+	camera.limit_top = bounds.position.y
+	camera.limit_right = bounds.end.x
+	camera.limit_bottom = bounds.end.y
+
+
 func set_jump_height(new_value: int) -> void:
 	jump_height = new_value
 	_set_physics_values()
