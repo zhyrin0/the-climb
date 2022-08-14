@@ -13,6 +13,8 @@
 ### Player Influence
 - Block out sunlight
 - Plant grafting to give it different abilities
+- Watering to start new vine
+- Creating new light source to influence growth direction
 ### Hazards
 - Bugs eating the vines
 
@@ -21,8 +23,16 @@
 - Platformer movement (left, right, jucy feeling jump and fall) ✔️
 - Platforms you can jump up on, and maybe even fall through ✔️
 - Camera that follows the player
-### Should Have
 - A plant that can grow upwards and create platforms
+- A level that cannot be traversed by letting the plant AI do it's thing alone
+### Should Have
 - Platforms that are naturally generated, in different states of usability
+- Ways to influence the plant
+	- Watering to start new vine - _if not already blooming_
+	- Creating new light sources, changing growth direction
 ### Could Have
+- Small anchor points, too small for player, big enough to let plant grow further
+- Platforms that produce vine ladders when after becoming flowery - _maybe a grafting upgrade_
+- Swarm of insects that need to be chased away to let the vines grow
+- Intro cinematics
 ### Won't Have
