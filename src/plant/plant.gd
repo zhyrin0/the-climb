@@ -4,6 +4,8 @@ const Vine := preload("res://src/plant/vine.gd")
 const VineScene := preload("res://src/plant/vine.tscn")
 
 
+signal anchor_reached(anchor)
+
 onready var _vines := $Vines as Node
 
 
@@ -18,6 +20,7 @@ func start_vine() -> void:
 	
 	var vine := VineScene.instance() as Vine
 	vine.init(light_direction, anchor_pos)
+	vine.connect("anchor_reached", self, "_on_Vine_anchor_reached", [], CONNECT_ONESHOT)
 	_vines.add_child(vine)
 	
 
@@ -25,3 +28,7 @@ func start_vine() -> void:
 func _sort_proximity(left: Node2D, right: Node2D) -> bool:
 	return global_position.distance_squared_to(left.global_position) < \
 			global_position.distance_squared_to(right.global_position)
+
+
+func _on_Vine_anchor_reached(anchor: Node2D) -> void:
+	emit_signal("anchor_reached", anchor)

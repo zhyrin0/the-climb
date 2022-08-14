@@ -26,13 +26,6 @@ func init(light_direction: Vector2, anchor_global_position: Vector2) -> void:
 		update_anchoring_curve(anchor_global_position)
 
 
-#func _ready() -> void:
-#	yield(get_tree().create_timer(1.0), "timeout")
-#
-#	create_light_seeking_curve(Vector2.UP)
-#	update_anchoring_curve(Vector2(192.0 * 0.75, 0.0))
-
-
 func _process(delta: float) -> void:
 	update()
 	if curve:

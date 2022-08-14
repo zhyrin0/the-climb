@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/platform/platform.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/player/player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://src/world/assets/root_layer_1.png" type="Texture" id=5]
 [ext_resource path="res://src/world/assets/root_layer_2.png" type="Texture" id=6]
 [ext_resource path="res://src/world/world.gd" type="Script" id=7]
+[ext_resource path="res://src/plant/plant.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 4, 248 )
@@ -130,7 +131,7 @@ __meta__ = {
 
 [node name="Platform1" parent="Platforms" instance=ExtResource( 1 )]
 position = Vector2( 48, 424 )
-_state = 2
+state = 2
 
 [node name="Polygon2D" parent="Platforms/Platform1" index="0"]
 polygon = PoolVector2Array( -24, -8, 24, -8, 24, 8, -24, 8 )
@@ -138,15 +139,23 @@ polygon = PoolVector2Array( -24, -8, 24, -8, 24, 8, -24, 8 )
 [node name="CollisionShape2D" parent="Platforms/Platform1" index="1"]
 shape = SubResource( 4 )
 
-[node name="Platform2" parent="Platforms" instance=ExtResource( 1 )]
+[node name="Platform2" parent="Platforms" groups=["anchor"] instance=ExtResource( 1 )]
 position = Vector2( 112, 392 )
-_state = 1
+state = 1
 
 [node name="Polygon2D" parent="Platforms/Platform2" index="0"]
 polygon = PoolVector2Array( -24, -8, 24, -8, 24, 8, -24, 8 )
 
 [node name="CollisionShape2D" parent="Platforms/Platform2" index="1"]
 shape = SubResource( 4 )
+
+[node name="Plants" type="Node2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Plant" parent="Plants" instance=ExtResource( 8 )]
+position = Vector2( 136, 480 )
 
 [node name="Sunlight" type="Light2D" parent="." groups=["light"]]
 position = Vector2( 96, -240 )
@@ -161,6 +170,8 @@ __meta__ = {
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 96, 472 )
+
+[connection signal="anchor_reached" from="Plants/Plant" to="." method="_on_Plant_anchor_reached"]
 
 [editable path="Platforms/Platform1"]
 [editable path="Platforms/Platform2"]

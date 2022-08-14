@@ -11,7 +11,7 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.33 ), 0.0, 0.0, 0, 0 ]
 [node name="Vine" type="Path2D"]
 curve = null
 script = ExtResource( 1 )
-_max_length = 64.0
+_max_length = 96.0
 _growth_speed = 32.0
 _debug_color = Color( 0.25098, 0.878431, 1, 0.25098 )
 
