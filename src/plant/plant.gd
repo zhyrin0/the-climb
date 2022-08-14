@@ -1,4 +1,4 @@
-extends Node2D
+extends StaticBody2D
 
 const Vine := preload("res://src/plant/vine.gd")
 const VineScene := preload("res://src/plant/vine.tscn")
@@ -23,6 +23,13 @@ func _ready() -> void:
 
 
 func set_state(new_value: int) -> void:
+	if new_value == State.GROWING and (state == State.GROWING or state == State.FLOWERING):
+		return
+	if new_value == State.GROWN and state != State.GROWING:
+		return
+	if new_value == State.FLOWERING and state != State.GROWING:
+		return
+	
 	state = new_value
 	var sprite_frame := 0
 	match new_value:
@@ -59,7 +66,7 @@ func _start_vine() -> void:
 	vine.init(light_direction, target.global_position)
 	vine.connect("max_length_reached", self, "_on_Vine_max_length_reached", [], CONNECT_ONESHOT)
 	vine.connect("anchor_reached", self, "_on_Vine_anchor_reached", [], CONNECT_ONESHOT)
-	_vines.add_child(vine)
+	_vines.call_deferred("add_child", vine)
 
 
 func _sort_proximity(left: Node2D, right: Node2D) -> bool:

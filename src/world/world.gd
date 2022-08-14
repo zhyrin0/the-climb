@@ -27,5 +27,5 @@ func _on_Plant_anchor_reached(anchor: Node2D) -> void:
 		var plant_pos: Vector2 = anchor.call("get_plant_global_position")
 		var plant := PlantScene.instance() as Plant
 		plant.connect("anchor_reached", self, "_on_Plant_anchor_reached", [], CONNECT_ONESHOT)
-		_plants.add_child(plant)
-		plant.global_position = plant_pos
+		_plants.call_deferred("add_child", plant)
+		plant.set_deferred("global_position", plant_pos)

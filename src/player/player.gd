@@ -89,3 +89,8 @@ func _reset_collision_rules() -> void:
 func _set_physics_values() -> void:
 	_jump_velocity = 2.0 * jump_height / jump_time if jump_time else 1.0
 	_gravity = 2.0 * jump_height / pow(jump_time if jump_time else 1.0, 2.0)
+
+
+func _on_Area2D_body_entered(body: Node) -> void:
+	# note: Plant.State.GROWING
+	body.set("state", 1)
