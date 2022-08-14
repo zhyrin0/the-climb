@@ -1,14 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/platform/platform.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/player/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/world/assets/sunrays.png" type="Texture" id=3]
+[ext_resource path="res://src/world/assets/root_layer_3.png" type="Texture" id=4]
+[ext_resource path="res://src/world/assets/root_layer_1.png" type="Texture" id=5]
+[ext_resource path="res://src/world/assets/root_layer_2.png" type="Texture" id=6]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 120 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4, 120 )
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 4, 248 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 96, 8 )
@@ -18,66 +18,95 @@ extents = Vector2( 24, 8 )
 
 [node name="World" type="Node2D"]
 
-[node name="Background" type="Polygon2D" parent="."]
-light_mask = 2
-color = Color( 0.12549, 0.12549, 0.12549, 1 )
-polygon = PoolVector2Array( 0, 0, 192, 0, 192, 224, 0, 224 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Background" type="ParallaxBackground" parent="."]
+layer = -1
 
-[node name="BarrierLeft" type="StaticBody2D" parent="."]
-collision_layer = 2
-collision_mask = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BarrierLeft"]
-position = Vector2( -4, 120 )
-shape = SubResource( 1 )
-
-[node name="BarrierRight" type="StaticBody2D" parent="."]
-collision_layer = 2
-collision_mask = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BarrierRight"]
-position = Vector2( 196, 120 )
-shape = SubResource( 2 )
-
-[node name="Bounds" type="Node2D" parent="."]
+[node name="Layer1" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2( 1, 0.3 )
+motion_mirroring = Vector2( 0, 240 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="TopLeft" type="Position2D" parent="Bounds"]
-__meta__ = {
-"_gizmo_extents_": 25.0
-}
+[node name="Sprite" type="Sprite" parent="Background/Layer1"]
+light_mask = 2
+texture = ExtResource( 5 )
+centered = false
 
-[node name="BottomRight" type="Position2D" parent="Bounds"]
-position = Vector2( 192, 240 )
+[node name="Layer2" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2( 1, 0.45 )
+motion_mirroring = Vector2( 0, 240 )
 __meta__ = {
-"_gizmo_extents_": 25.0
-}
-
-[node name="Sunlight" type="Light2D" parent="." groups=["light"]]
-position = Vector2( 96, -240 )
-texture = ExtResource( 3 )
-offset = Vector2( 0, 360 )
-color = Color( 1, 1, 0.752941, 1 )
-energy = 1.5
-range_item_cull_mask = 2
-__meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
+[node name="Sprite" type="Sprite" parent="Background/Layer2"]
+light_mask = 2
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Layer3" type="ParallaxLayer" parent="Background"]
+motion_scale = Vector2( 1, 0.6 )
+motion_mirroring = Vector2( 0, 240 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Background/Layer3"]
+light_mask = 2
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Technical" type="Node2D" parent="."]
+
+[node name="BarrierLeft" type="StaticBody2D" parent="Technical"]
+position = Vector2( -8, 0 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Technical/BarrierLeft"]
+position = Vector2( 4, 248 )
+shape = SubResource( 5 )
+
+[node name="BarrierRight" type="StaticBody2D" parent="Technical"]
+position = Vector2( 192, 0 )
+collision_layer = 2
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Technical/BarrierRight"]
+position = Vector2( 4, 248 )
+shape = SubResource( 5 )
+
+[node name="Bounds" type="Node2D" parent="Technical"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TopLeft" type="Position2D" parent="Technical/Bounds"]
+__meta__ = {
+"_gizmo_extents_": 25.0
+}
+
+[node name="BottomRight" type="Position2D" parent="Technical/Bounds"]
+position = Vector2( 192, 496 )
+__meta__ = {
+"_gizmo_extents_": 25.0
+}
+
 [node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2( 0, 224 )
+position = Vector2( 0, 480 )
 collision_layer = 2
 collision_mask = 0
 __meta__ = {
@@ -98,7 +127,7 @@ __meta__ = {
 }
 
 [node name="Platform1" parent="Platforms" instance=ExtResource( 1 )]
-position = Vector2( 48, 168 )
+position = Vector2( 48, 424 )
 _state = 2
 
 [node name="Polygon2D" parent="Platforms/Platform1" index="0"]
@@ -108,7 +137,7 @@ polygon = PoolVector2Array( -24, -8, 24, -8, 24, 8, -24, 8 )
 shape = SubResource( 4 )
 
 [node name="Platform2" parent="Platforms" instance=ExtResource( 1 )]
-position = Vector2( 112, 136 )
+position = Vector2( 112, 392 )
 _state = 1
 
 [node name="Polygon2D" parent="Platforms/Platform2" index="0"]
@@ -117,8 +146,19 @@ polygon = PoolVector2Array( -24, -8, 24, -8, 24, 8, -24, 8 )
 [node name="CollisionShape2D" parent="Platforms/Platform2" index="1"]
 shape = SubResource( 4 )
 
+[node name="Sunlight" type="Light2D" parent="." groups=["light"]]
+position = Vector2( 96, -240 )
+texture = ExtResource( 3 )
+offset = Vector2( 0, 360 )
+color = Color( 1, 1, 0.752941, 1 )
+range_layer_min = -1
+range_item_cull_mask = 2
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 64, 216 )
+position = Vector2( 96, 472 )
 
 [editable path="Platforms/Platform1"]
 [editable path="Platforms/Platform2"]
