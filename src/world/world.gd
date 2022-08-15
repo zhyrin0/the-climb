@@ -9,11 +9,16 @@ const Player := preload("res://src/player/player.gd")
 
 onready var _plants := $Plants as Node2D
 onready var _lights := $Lights as Node2D
+onready var _sunlight := $Lights/Sunlight as Light2D
+onready var _player := $Player as Player
 
 
 func _ready() -> void:
-	var player := $Player as Player
-	player.set_camera_bounds(_get_camera_bounds())
+	_player.set_camera_bounds(_get_camera_bounds())
+
+
+func _process(_delta: float) -> void:
+	_sunlight.position.y = _player.get_screen_center().y - get_viewport_rect().size.y / 2.0
 
 
 func _get_camera_bounds() -> Rect2:

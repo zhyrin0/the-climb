@@ -19,6 +19,7 @@ onready var _watering_can := $Pivot/WateringCan as Sprite
 onready var _watering_can_area := $Pivot/WateringCan/Area2D as Area2D
 onready var _lantern := $Pivot/Lantern as Sprite
 onready var _fall_raycast := $FallRayCast as RayCast2D
+onready var _camera := $Camera2D as Camera2D
 onready var _animation_player := $AnimationPlayer as AnimationPlayer
 
 
@@ -72,6 +73,10 @@ func _unhandled_key_input(_event: InputEventKey) -> void:
 		_lantern.hide()
 	elif Input.is_action_just_pressed("cycle_items") and _active_ability != -1 and _abilities.size() > 1:
 		_active_ability = _abilities[1 - _active_ability]
+
+
+func get_screen_center() -> Vector2:
+	return _camera.get_camera_screen_center()
 
 
 func pick_up(type: int) -> void:

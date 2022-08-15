@@ -163,9 +163,9 @@ __meta__ = {
 }
 
 [node name="Sunlight" type="Light2D" parent="Lights" groups=["light"]]
-position = Vector2( 96, -240 )
+position = Vector2( 96, 0 )
 texture = ExtResource( 3 )
-offset = Vector2( 0, 360 )
+offset = Vector2( 0, 120 )
 color = Color( 1, 1, 0.752941, 1 )
 range_layer_min = -1
 range_item_cull_mask = 2
