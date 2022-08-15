@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/platform/platform.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/player/player.tscn" type="PackedScene" id=2]
@@ -10,9 +10,13 @@
 [ext_resource path="res://src/plant/plant.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/pickup/pickup.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/pickup/assets/lantern.png" type="Texture" id=10]
+[ext_resource path="res://src/pickup/assets/watering_can.png" type="Texture" id=11]
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 4, 248 )
+extents = Vector2( 4, 424 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 424 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 96, 8 )
@@ -74,7 +78,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Technical/BarrierLeft"]
-position = Vector2( 4, 248 )
+position = Vector2( 4, 424 )
 shape = SubResource( 5 )
 
 [node name="BarrierRight" type="StaticBody2D" parent="Technical"]
@@ -87,8 +91,8 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Technical/BarrierRight"]
-position = Vector2( 4, 248 )
-shape = SubResource( 5 )
+position = Vector2( 4, 424 )
+shape = SubResource( 6 )
 
 [node name="Bounds" type="Node2D" parent="Technical"]
 __meta__ = {
@@ -102,13 +106,13 @@ __meta__ = {
 }
 
 [node name="BottomRight" type="Position2D" parent="Technical/Bounds"]
-position = Vector2( 192, 496 )
+position = Vector2( 192, 848 )
 __meta__ = {
 "_gizmo_extents_": 25.0
 }
 
 [node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2( 0, 480 )
+position = Vector2( 0, 832 )
 collision_layer = 2
 collision_mask = 0
 __meta__ = {
@@ -116,7 +120,7 @@ __meta__ = {
 }
 
 [node name="Polygon2D" type="Polygon2D" parent="Ground"]
-color = Color( 0.12549, 0.12549, 0.12549, 1 )
+color = Color( 0.352941, 0.211765, 0.0862745, 1 )
 polygon = PoolVector2Array( 0, 0, 192, 0, 192, 16, 0, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
@@ -128,31 +132,79 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Platform1" parent="Platforms" instance=ExtResource( 1 )]
-position = Vector2( 48, 424 )
+[node name="Platform1" parent="Platforms" groups=["anchor"] instance=ExtResource( 1 )]
+position = Vector2( 56, 768 )
 state = 2
+
+[node name="Sprite" parent="Platforms/Platform1" index="0"]
+frame = 2
 
 [node name="Platform2" parent="Platforms" groups=["anchor"] instance=ExtResource( 1 )]
-position = Vector2( 112, 392 )
+position = Vector2( 160, 768 )
 state = 1
 
+[node name="Sprite" parent="Platforms/Platform2" index="0"]
+frame = 1
+
 [node name="Platform3" parent="Platforms" groups=["anchor"] instance=ExtResource( 1 )]
-position = Vector2( 176, 328 )
+position = Vector2( 128, 702 )
 state = 2
+
+[node name="Sprite" parent="Platforms/Platform3" index="0"]
+frame = 2
+
+[node name="Platform4" parent="Platforms" groups=["anchor"] instance=ExtResource( 1 )]
+position = Vector2( 8, 648 )
+state = 1
+
+[node name="Sprite" parent="Platforms/Platform4" index="0"]
+frame = 1
+
+[node name="Platform5" parent="Platforms" groups=["anchor"] instance=ExtResource( 1 )]
+position = Vector2( 168, 648 )
+state = 2
+
+[node name="Sprite" parent="Platforms/Platform5" index="0"]
+frame = 2
+
+[node name="Platform6" parent="Platforms" groups=["anchor"] instance=ExtResource( 1 )]
+position = Vector2( 80, 592 )
+state = 2
+
+[node name="Sprite" parent="Platforms/Platform6" index="0"]
+frame = 2
+
+[node name="Platform7" parent="Platforms" groups=["anchor"] instance=ExtResource( 1 )]
+position = Vector2( 176, 592 )
+collision_layer = 8
+
+[node name="Sprite" parent="Platforms/Platform7" index="0"]
+modulate = Color( 1, 1, 1, 0.75 )
+
+[node name="Platform8" parent="Platforms" groups=["anchor"] instance=ExtResource( 1 )]
+position = Vector2( 184, 520 )
+state = 2
+
+[node name="Sprite" parent="Platforms/Platform8" index="0"]
+frame = 2
 
 [node name="Plants" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Plant" parent="Plants" instance=ExtResource( 8 )]
-position = Vector2( 136, 480 )
+[node name="Plant1" parent="Plants" instance=ExtResource( 8 )]
+position = Vector2( 144, 832 )
+
+[node name="Plant2" parent="Plants" instance=ExtResource( 8 )]
+position = Vector2( 80, 584 )
 
 [node name="WateringCan" parent="." instance=ExtResource( 9 )]
-position = Vector2( 48, 400 )
+position = Vector2( 12, 627 )
+texture = ExtResource( 11 )
 
 [node name="Lantern" parent="." instance=ExtResource( 9 )]
-position = Vector2( 176, 304 )
+position = Vector2( 180, 500 )
 texture = ExtResource( 10 )
 type = 1
 
@@ -174,11 +226,17 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 96, 472 )
+position = Vector2( 96, 816 )
 
-[connection signal="anchor_reached" from="Plants/Plant" to="." method="_on_Plant_anchor_reached" flags=6]
+[connection signal="anchor_reached" from="Plants/Plant1" to="." method="_on_Plant_anchor_reached" flags=6]
+[connection signal="anchor_reached" from="Plants/Plant2" to="." method="_on_Plant_anchor_reached" flags=6]
 [connection signal="lantern_lighted" from="Player" to="." method="_on_Player_lantern_lighted"]
 
 [editable path="Platforms/Platform1"]
 [editable path="Platforms/Platform2"]
 [editable path="Platforms/Platform3"]
+[editable path="Platforms/Platform4"]
+[editable path="Platforms/Platform5"]
+[editable path="Platforms/Platform6"]
+[editable path="Platforms/Platform7"]
+[editable path="Platforms/Platform8"]
