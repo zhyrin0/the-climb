@@ -60,7 +60,7 @@ func create_light_seeking_curve(light_direction: Vector2) -> void:
 
 func update_targeting_curve(target_global_position: Vector2) -> void:
 	var target_position: Vector2 = to_local(target_global_position)
-	if position.distance_squared_to(target_global_position) > _max_length*_max_length:
+	if global_position.distance_squared_to(target_global_position) > _max_length*_max_length:
 		target_position = target_position.normalized() * _max_length
 	curve.set_point_position(1, target_position)
 
