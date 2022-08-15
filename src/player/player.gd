@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 
+signal lantern_lighted(lantern_global_position)
+
 const PLATFORM_COLLISION_BIT := 2
 export(int) var movement_speed: int
 export(int) var jump_height: int setget set_jump_height
@@ -63,6 +65,7 @@ func _unhandled_key_input(_event: InputEventKey) -> void:
 			_watering_can_area.set_deferred("monitoring", true)
 		else:
 			_lantern.show()
+			emit_signal("lantern_lighted", _lantern.global_position)
 	elif Input.is_action_just_released("use_item"):
 		_watering_can.hide()
 		_watering_can_area.set_deferred("monitoring", false)

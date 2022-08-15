@@ -156,7 +156,13 @@ position = Vector2( 176, 304 )
 texture = ExtResource( 10 )
 type = 1
 
-[node name="Sunlight" type="Light2D" parent="." groups=["light"]]
+[node name="Lights" type="Node2D" parent="."]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sunlight" type="Light2D" parent="Lights" groups=["light"]]
 position = Vector2( 96, -240 )
 texture = ExtResource( 3 )
 offset = Vector2( 0, 360 )
@@ -171,6 +177,7 @@ __meta__ = {
 position = Vector2( 96, 472 )
 
 [connection signal="anchor_reached" from="Plants/Plant" to="." method="_on_Plant_anchor_reached" flags=6]
+[connection signal="lantern_lighted" from="Player" to="." method="_on_Player_lantern_lighted"]
 
 [editable path="Platforms/Platform1"]
 [editable path="Platforms/Platform2"]

@@ -1,11 +1,14 @@
 extends Node2D
 
+const LanternLight := preload("res://src/lantern_light/lantern_light.gd")
+const LanternLightScene := preload("res://src/lantern_light/lantern_light.tscn")
 const Plant := preload("res://src/plant/plant.gd")
 const PlantScene := preload("res://src/plant/plant.tscn")
 const Player := preload("res://src/player/player.gd")
 
 
 onready var _plants := $Plants as Node2D
+onready var _lights := $Lights as Node2D
 
 
 func _ready() -> void:
@@ -29,3 +32,9 @@ func _on_Plant_anchor_reached(anchor: Node2D) -> void:
 		plant.connect("anchor_reached", self, "_on_Plant_anchor_reached", [], CONNECT_ONESHOT)
 		_plants.call_deferred("add_child", plant)
 		plant.set_deferred("global_position", plant_pos)
+
+
+func _on_Player_lantern_lighted(lantern_global_position: Vector2) -> void:
+	var lantern_light := LanternLightScene.instance() as LanternLight
+	_lights.add_child(lantern_light)
+	lantern_light.global_position = lantern_global_position
