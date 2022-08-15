@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/platform/platform.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/player/player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://src/world/world.gd" type="Script" id=7]
 [ext_resource path="res://src/plant/plant.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/pickup/pickup.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/pickup/assets/lantern.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 4, 248 )
@@ -135,6 +136,10 @@ state = 2
 position = Vector2( 112, 392 )
 state = 1
 
+[node name="Platform3" parent="Platforms" groups=["anchor"] instance=ExtResource( 1 )]
+position = Vector2( 176, 328 )
+state = 2
+
 [node name="Plants" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
@@ -145,6 +150,11 @@ position = Vector2( 136, 480 )
 
 [node name="WateringCan" parent="." instance=ExtResource( 9 )]
 position = Vector2( 48, 400 )
+
+[node name="Lantern" parent="." instance=ExtResource( 9 )]
+position = Vector2( 176, 304 )
+texture = ExtResource( 10 )
+type = 1
 
 [node name="Sunlight" type="Light2D" parent="." groups=["light"]]
 position = Vector2( 96, -240 )
@@ -164,3 +174,4 @@ position = Vector2( 96, 472 )
 
 [editable path="Platforms/Platform1"]
 [editable path="Platforms/Platform2"]
+[editable path="Platforms/Platform3"]

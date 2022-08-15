@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/player/player.gd" type="Script" id=1]
 [ext_resource path="res://src/pickup/assets/watering_can.png" type="Texture" id=2]
 [ext_resource path="res://src/player/assets/gnome.png" type="Texture" id=3]
+[ext_resource path="res://src/pickup/assets/lantern.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 16.0
@@ -78,7 +79,6 @@ fall_gravity_multiplier = 1.35
 [node name="WateringCan" type="Sprite" parent="Pivot"]
 visible = false
 position = Vector2( 16, -12 )
-rotation = 0.610865
 texture = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="Pivot/WateringCan"]
@@ -88,6 +88,11 @@ monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/WateringCan/Area2D"]
 shape = SubResource( 3 )
+
+[node name="Lantern" type="Sprite" parent="Pivot"]
+visible = false
+position = Vector2( 15, -12 )
+texture = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Pivot"]
 texture = ExtResource( 3 )

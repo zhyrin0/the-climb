@@ -10,10 +10,12 @@ var _jump_velocity: float
 var _gravity: float
 var _velocity: Vector2
 var _fallthrough_platform: Node
-var _can_water_plants := false
+var _abilities := []
+var _active_ability := -1
 onready var _pivot := $Pivot as Node2D
 onready var _watering_can := $Pivot/WateringCan as Sprite
 onready var _watering_can_area := $Pivot/WateringCan/Area2D as Area2D
+onready var _lantern := $Pivot/Lantern as Sprite
 onready var _fall_raycast := $FallRayCast as RayCast2D
 onready var _animation_player := $AnimationPlayer as AnimationPlayer
 
@@ -54,18 +56,26 @@ func _unhandled_key_input(_event: InputEventKey) -> void:
 		_pivot.scale.x = -1.0
 	elif Input.is_action_just_pressed("move_right"):
 		_pivot.scale.x = 1.0
-	elif Input.is_action_just_pressed("use_item") and _can_water_plants:
-		_watering_can.show()
-		_watering_can_area.set_deferred("monitoring", true)
+	elif Input.is_action_just_pressed("use_item") and _active_ability != -1:
+		# note: Pickup.Type.WATERING_CAN 
+		if _active_ability == 0:
+			_watering_can.show()
+			_watering_can_area.set_deferred("monitoring", true)
+		else:
+			_lantern.show()
 	elif Input.is_action_just_released("use_item"):
 		_watering_can.hide()
 		_watering_can_area.set_deferred("monitoring", false)
+		_lantern.hide()
+	elif Input.is_action_just_pressed("cycle_items") and _active_ability != -1 and _abilities.size() > 1:
+		_active_ability = _abilities[1 - _active_ability]
 
 
 func pick_up(type: int) -> void:
-	# note: Pickup.Type.WATERING_CAN
-	if type == 0:
-		_can_water_plants = true
+	if not _abilities.has(type):
+		_abilities.push_back(type)
+	if _active_ability == -1:
+		_active_ability = type
 
 
 func set_camera_bounds(bounds: Rect2) -> void:

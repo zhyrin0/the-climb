@@ -4,10 +4,12 @@ extends Sprite
 
 enum Type {
 	WATERING_CAN,
+	LANTERN,
 }
 
 export(Type) var type: int setget set_type
 export(Texture) var watering_can: Texture
+export(Texture) var lantern: Texture
 
 
 func _ready() -> void:
@@ -19,6 +21,8 @@ func set_type(new_value: int) -> void:
 	match type:
 		Type.WATERING_CAN:
 			texture = watering_can
+		Type.LANTERN:
+			texture = lantern
 
 
 func _on_Area2D_body_entered(body: Node) -> void:
