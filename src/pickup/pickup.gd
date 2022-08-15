@@ -13,6 +13,8 @@ export(Texture) var lantern: Texture
 
 
 func _ready() -> void:
+	var animation_player := $AnimationPlayer as AnimationPlayer
+	animation_player.play("idle")
 	set_type(type)
 
 
